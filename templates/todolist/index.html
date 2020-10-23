@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        
+        <link rel="stylesheet" href="{% static 'todolist/styles.css' %}">
+        
+        <title>To Do</title>
+        
+    </head>
+
+    <body>
+        <div class='main-container'>
+            <div class='sub-container0'>
+                <p>To Do List</p>
+            </div>
+            <div class='sub-container1'>
+              <form action="{% url 'add' %}" method="POST" role="form">
+                {% csrf_token%}
+                {{form.text}}
+                
+                
+            
+            </div>
+            <div class='sub-container2'>
+                <button type="submit" >+</button>
+            </form>  
+
+                
+              
+                    
+            
+                    <a href="{% url 'delete'%}"><button type="button ">-</button></a>
+                    <a href="{%url 'deleteall' %}"><button type="button" >Clear</button></a>
+               
+            </div>
+
+            <div class='sub-container3'>
+                <ul id="list">
+                    {% for todoitem in todo_items %}
+                        {%if todoitem.completed %}
+                            <li class="completed">{{todoitem.text}}</li>
+                        {% else %} 
+                            <li ><a href="{%url 'completed' todoitem.id %}" >{{todoitem.text}}</a></li>
+                        {%endif%}
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+        </div>
+
+    </body>
+</html>
